@@ -1,69 +1,71 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu, X, School, BookOpen, Users, LogIn } from 'lucide-react';
 import Link from 'next/link';
+import { Menu, X, School } from 'lucide-react';
 
 export default function Header() {
-  const [navOpen, setNavOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] text-white shadow-lg sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        
+    <header className="fixed top-0 left-0 w-full z-50 bg-black text-white shadow-md border-b border-gray-800 font-semibold">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <School size={30} className="text-[#e94560]" />
-          <span className="text-2xl font-bold tracking-wide">School LMS</span>
+        <Link href="/" className="flex items-center gap-2 tracking-wider">
+          <School className="text-[#e94560]" size={26} />
+          <span className="text-2xl font-bold uppercase">LMS Portal</span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8 text-lg font-medium">
-          <NavItem href="/" label="Home" />
-          <NavItem href="/courses" label="Courses" />
-          <NavItem href="/teachers" label="Teachers" />
-          <NavItem href="/students" label="Students" />
-          <NavItem href="/login" label="Login" icon={<LogIn size={18} />} />
+        {/* Desktop Nav - Centered */}
+        <nav className="hidden md:flex gap-10 text-lg mx-auto tracking-wide">
+          {['Dashboard', 'Courses', 'Teachers', 'Students', 'About'].map((text, i) => (
+            <Link
+              key={i}
+              href={`/${text.toLowerCase()}`}
+              className="relative group"
+            >
+              <span className="group-hover:text-[#e94560] transition">{text}</span>
+              <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#e94560] group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute left-0 top-0 h-0.5 w-0 bg-[#e94560] group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          ))}
         </nav>
 
+        {/* Login button */}
+        <Link
+          href="/login"
+          className="hidden md:inline-block px-4 py-2 rounded-full bg-[#e94560] hover:bg-white hover:text-[#e94560] transition font-semibold"
+        >
+          Login
+        </Link>
+
         {/* Mobile Menu Toggle */}
-        <button className="md:hidden" onClick={() => setNavOpen(!navOpen)}>
-          {navOpen ? <X size={28} /> : <Menu size={28} />}
+        <button onClick={() => setOpen(!open)} className="md:hidden">
+          {open ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
 
       {/* Mobile Nav */}
-      {navOpen && (
-        <div className="md:hidden bg-[#1c1b2f] px-6 pb-6 space-y-4 text-lg font-medium">
-          <MobileNavItem href="/" label="Home" />
-          <MobileNavItem href="/courses" label="Courses" />
-          <MobileNavItem href="/teachers" label="Teachers" />
-          <MobileNavItem href="/students" label="Students" />
-          <MobileNavItem href="/login" label="Login" />
+      {open && (
+        <div className="md:hidden bg-[#0f0f0f] border-t border-gray-700 px-6 py-6 space-y-5 text-lg">
+          {['Home', 'Courses', 'Teachers', 'Students', 'About'].map((text, i) => (
+            <Link
+              key={i}
+              href={`/${text.toLowerCase()}`}
+              className="block hover:text-[#e94560] transition"
+            >
+              {text}
+            </Link>
+          ))}
+          <Link
+            href="/login"
+            className="block bg-[#e94560] text-center py-2 rounded-full font-semibold hover:bg-white hover:text-[#e94560] transition"
+          >
+            Login
+          </Link>
         </div>
       )}
     </header>
-  );
-}
-
-function NavItem({ href, label, icon }) {
-  return (
-    <Link
-      href={href}
-      className="relative group transition duration-300"
-    >
-      <span className="group-hover:text-[#e94560] transition-all duration-300">
-        {label}
-      </span>
-      <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#e94560] group-hover:w-full transition-all duration-300"></span>
-    </Link>
-  );
-}
-
-function MobileNavItem({ href, label }) {
-  return (
-    <Link href={href} className="block hover:text-[#e94560] transition">
-      {label}
-    </Link>
   );
 }

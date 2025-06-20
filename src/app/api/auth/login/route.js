@@ -1,5 +1,6 @@
-import dbConnect from '@/lib/dbConnect';
+import dbConnect from '@/lib/dbconnect';
 import User from '@/models/userModel';
+
 import bcrypt from 'bcryptjs';
 import { generateToken } from '@/utils/auth';
 

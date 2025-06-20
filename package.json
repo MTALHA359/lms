@@ -7,8 +7,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "framer-motion": "^12.18.1",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.518.0",
+    "mongoose": "^8.16.0",
     "next": "14.2.29",
     "react": "^18",
     "react-dom": "^18",
@@ -20,5 +26,18 @@
   "devDependencies": {
     "postcss": "^8",
     "tailwindcss": "^3.4.1"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "tailwind.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MTALHA359/lms.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MTALHA359/lms/issues"
+  },
+  "homepage": "https://github.com/MTALHA359/lms#readme"
 }
